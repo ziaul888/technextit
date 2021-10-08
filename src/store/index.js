@@ -1,6 +1,6 @@
-import { configure, getDefaultMiddleware } from "@reduxjs/toolkit";
-import missoinReducer from "../ruducers/missoinReducer";
-export default configure({
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import missoinReducer from "./reducers/missoinReducer";
+export default configureStore({
   reducer: {
     mission: missoinReducer,
   },
