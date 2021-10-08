@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getMission } from "../actions/missionAction";
+
+
+
 const missionReducer = createSlice({
   name: "mission",
   initialState: {
     missions: [],
+    missionsContainer:[],
     loader: false,
     errors: {},
   },
   reducers: {
-    // getMission: (state, action) => {
-    //   state.missions = [...state.missions, action.payload];
-    // },
+    missionFilter:(state,action)=>{
+      state.missions=state.missionsContainer.filter((missio)=>missio.rocket.rocket_name.toLowerCase().includes(action.payload))
+    }
   },
   extraReducers: {
     [getMission.padding]: (state, action) => {
@@ -19,6 +23,7 @@ const missionReducer = createSlice({
     [getMission.fulfilled]: (state, action) => {
       state.loader = false;
       state.missions = action.payload;
+      state.missionsContainer=action.payload
     },
     [getMission.rejected]: (state, action) => {
       state.loader = true;
@@ -26,5 +31,5 @@ const missionReducer = createSlice({
     },
   },
 });
-// export const {getMission}=missionReducer.actions
+ export const {missionFilter}=missionReducer.actions
 export default missionReducer.reducer;

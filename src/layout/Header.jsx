@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { missionFilter } from "../store/reducers/missoinReducer";
 
 export const Header = () => {
+  const inputRef = useRef("");
+  const dispatch = useDispatch();
+
+  const missionFiter = () => {
+    dispatch(missionFilter(inputRef.current.value));
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,6 +69,8 @@ export const Header = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                ref={inputRef}
+                onChange={missionFiter}
               />
               <button className="btn btn-outline-success" type="submit">
                 Search
