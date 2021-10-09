@@ -6,7 +6,7 @@ const missionReducer = createSlice({
   initialState: {
     missions: [],
     missionsContainer: [],
-    status: [],
+
     loader: false,
     errors: {},
   },

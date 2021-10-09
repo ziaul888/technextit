@@ -1,7 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { missionSearch } from "../store/reducers/missoinReducer";
-import { filterStatus } from "../store/reducers/missoinReducer";
+import { Link } from "react-router-dom";
+
+import { failure } from "../store/actions/missionAction";
+import { success } from "../store/actions/missionAction";
 
 export const Header = () => {
   const inputRef = useRef("");
@@ -11,35 +14,14 @@ export const Header = () => {
   const missionFiter = () => {
     dispatch(missionSearch(inputRef.current.value));
   };
-  const failure = () => {
-    const mission = missionsContainer?.filter(
-      (item) => item.launch_success === false
-    );
-    dispatch(filterStatus(mission));
-  };
-  const success = () => {
-    const mission = missionsContainer?.filter(
-      (item) => item.launch_success === true
-    );
-    dispatch(filterStatus(mission));
-  };
-  // const success = () => {
-  //   const mission = missions?.filter((item) => {
-  //     if (item.launch_success === true) {
-  //       return {
-  //         ...missions,
-  //         missions: mission,
-  //       };
-  //     } else return missions;
-  //   });
-
-  // };
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light top-fixed">
         <div className="container">
-          <a className="navbar-brand">spacex</a>
+          <Link className="navbar-brand" to="./">
+            spacex
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -69,13 +51,13 @@ export const Header = () => {
                   aria-labelledby="navbarScrollingDropdown"
                 >
                   <li>
-                    <a className="dropdown-item">Last Week</a>
+                    <a className="dropdown-item"> Week</a>
                   </li>
                   <li>
-                    <a className="dropdown-item">Last Month</a>
+                    <a className="dropdown-item"> Month</a>
                   </li>
                   <li>
-                    <a className="dropdown-item">Last Year</a>
+                    <a className="dropdown-item"> Year</a>
                   </li>
                 </ul>
               </li>
@@ -94,12 +76,18 @@ export const Header = () => {
                   aria-labelledby="navbarScrollingDropdown"
                 >
                   <li>
-                    <a className="dropdown-item" onClick={failure}>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => dispatch(failure(missionsContainer))}
+                    >
                       Failure
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" onClick={success}>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => dispatch(success(missionsContainer))}
+                    >
                       Success
                     </a>
                   </li>

@@ -26,7 +26,7 @@ export const MissionList = () => {
                         alt="..."
                       />
                       <h5 className="card-title">{item.mission_name}</h5>
-                      <h6 className="card-subtitle mb-2 text-muted">
+                      <h6 className="card-subtitle mb-2 ">
                         {item.rocket.rocket_name}
                       </h6>
                       <h6 className="card-subtitle mb-2 text-muted">
@@ -34,7 +34,10 @@ export const MissionList = () => {
                       </h6>
 
                       <h6 className="card-subtitle mb-2 text-muted">
-                        launch year:{item.launch_year}
+                        Launch year:{item.launch_year}
+                      </h6>
+                      <h6 className="card-subtitle mb-2 ">
+                        Launch site:{item.launch_site.site_name}
                       </h6>
 
                       {/* <p className="card-text">
